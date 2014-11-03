@@ -7,7 +7,9 @@ D3StackedBar
 
 Usage
 ==================
+```javascript
 var stackedbar = new D3StackedBar({ 
 		container: "#stackedbar"
 });
 stackedbar.show();
+```
