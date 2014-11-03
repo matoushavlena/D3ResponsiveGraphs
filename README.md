@@ -19,12 +19,22 @@ var stackedbar = new D3StackedBar({
 });
 stackedbar.show();
 ```
-###1.1 Methods
+###<a name="data_sctructure"/>1.2 Data Structure
+Data can be obtained from AJAX GET request (if `dataUrl` property is used) or can be directly assigned to a `data` property. Data has to have following format with the same length of all `values` array:
+```javascript
+[ 
+        { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
+        { key: "category 2", values: [{ x: 2013, y: -30 }, { x: 2014, y: 10 } ]},  
+        { key: "category 3", values: [{ x: 2013, y: 30 }, { x: 2014, y: 30 } ]}
+]
+```
+
+###1.3 Methods
 * `show()` - renders stackedbar into appropriate HTML container set up in `container` property in options
-* `update()` - updates stackedbar, usually called when the data you want to display has changed
+* `update()` - updates stackedbar, usually called when the data you want to display has changed. To manipulate data in a graph, use `dataset` property of the graph (for example `stackedbar.dataset = { ... }; stackedbar.update();`)
 * `resize()` - resizes stackedbar to fit it's container, called automatically on window resize if `resizable` option is set to true
 
-### 1.2 Options
+###1.4 Options
 Example of default options:
 ```javascript
 {
@@ -76,7 +86,7 @@ More detailed explanation:
 * `margin` - margins in pixels around the graph, useful when we need to set up some space for axes' ticks
 * `barSpacing` - spacing between bars
 * `dataUrl` - url of a data service from where we want to get data, using AJAX GET. If the value is null, we render data stored in a `data` property (below)
-* `data` - data object used to render, it must have the following format:
+* `data` - data object used to render, it must have a specifi format describer [above](#data_structure)
 ```
 [ 
         { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
