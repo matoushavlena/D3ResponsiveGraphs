@@ -86,7 +86,7 @@ More detailed explanation:
 * `margin` - margins in pixels around the graph, useful when we need to set up some space for axes' ticks
 * `barSpacing` - spacing between bars
 * `dataUrl` - url of a data service from where we want to get data, using AJAX GET. If the value is null, we render data stored in a `data` property (below)
-* `data` - data object used to render, it must have a specifi format describer [above](#data_structure)
+* `data` - data object used to render, it must have a specifi format describer [above](#12-data-structure)
 ```
 [ 
         { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
