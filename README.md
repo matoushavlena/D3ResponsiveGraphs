@@ -1,12 +1,13 @@
 #D3ResponsiveGraphs
 
-A library of responsive graphs build with D3js and jQuery. 
+A library of responsive graphs built with D3js and jQuery. 
 
 ##1. D3StackedBar
+D3js stacked bar chart with a support of negative values, responsive design, legends, tooltips, and ability to show data in a table view. Demo is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-stackedbar.html
+
 ![alt D3StackedBar](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.stackedbar.png)
 
 ###1.1 Usage
-==================
 HTML:
 ```html
 <div id="#stackedbar"></div>
