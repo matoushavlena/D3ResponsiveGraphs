@@ -3,7 +3,7 @@
 A library of responsive graphs build with D3js and jQuery. 
 
 ##D3StackedBar
-![alt tag](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/branch/master/screenshots/d3.stackedbar.png)
+![alt D3StackedBar](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.stackedbar.png)
 ###Usage
 ==================
 ```javascript
