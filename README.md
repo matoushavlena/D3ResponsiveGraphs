@@ -82,15 +82,30 @@ Example of default options:
 }	
 ```
 More detailed explanation:
-* `container` - description of a DOM element that should be used as a container for rendering
-* `margin` - margins in pixels around the graph, useful when we need to set up some space for axes' ticks
-* `barSpacing` - spacing between bars
-* `dataUrl` - url of a data service from where we want to get data, using AJAX GET. If the value is null, we render data stored in a `data` property (below)
-* `data` - data object used to render, it must have a specifi format describer [above](#12-data-structure)
-```
-[ 
-        { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
-        { key: "category 2", values: [{ x: 2013, y: -30 }, { x: 2014, y: 10 } ]},  
-        { key: "category 3", values: [{ x: 2013, y: 30 }, { x: 2014, y: 30 } ]}
-]
-```
+* `container` (String) - identification of a DOM element that should be used as a container for rendering
+* `margin` (Object) - margins in pixels around the graph, useful when we need to set up some space for axes' ticks
+* `barSpacing` (Float) - spacing between bars
+* `dataUrl` (String) - url of a data service from where we want to get data, using AJAX GET. If the value is null, we render data stored in a `data` property (below)
+* `data` (Object) - data object used to render, it must have a specifi format described [above](#12-data-structure)
+* `resizable` (boolean) - if set to true, resize() method is gonna be called everytime $(window).on('resize') event is triggered
+* `showLegend` (boolean) - if set to true, legend is going to be displayed
+* `showTooltip` (boolean) - if set to true, on mouse over tooltip is going to be displayed
+* `showRuler` (boolean) - if set to true, x and y axes are going to be displayed together with ruler
+* `showHorizontalGrid` (boolean) - if set to true, horizontal grid is going to be displayed
+* `verticalText` (String) - text describing the y units, if set to null, nothing is displayed
+* `displayTable` (boolean) - if set to true, the graph could be converted to a table view
+* `yFormat` (function) - function that can modify/format y values
+* `colors` (Array) - array of colors that are used as background colors for bars (in the given order), can be represented by RGBA or HEX
+* `xTickSize` (function) - size of the ticks on x axis (ruler)
+* `yTickSize` (function) - size of the ticks on y axis (ruler)
+* `xTicks` (Integer) - number of ticks to show on x axis (number of tickes doesn't have to correspond exactly because D3js takes this number only as a recommendation)
+* `yTicks`: number of ticks to show on y axis (number of tickes doesn't have to correspond exactly because D3js takes this number only as a recommendation)
+* `xTickPadding` (Integer) - padding between text and ticks on the x ruler
+* `yTickPadding` (Integer) - padding between text and ticks on the y ruler
+* `yAxisTranslate` (function) - position of y axis
+* `xAxisTranslate` (function) - position of x axis
+* `xTickFormat` (function) - function that can modify/format x values on the x axis
+* `yTickFormat` (function) - function that can modify/format y values on the y axis
+* `tooltipText` (function) - function that returns String value which is being displayed as a tooltip text
+* `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
+* `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
