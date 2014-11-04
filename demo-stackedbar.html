@@ -28,15 +28,15 @@
 		
 		$("#button").on("click", function() {
 			var newData = new Array();
-			var xDomain = [2013, 2014, 2015];
+			var year = getRandomInt(2005, 2014);
 			var numCategories = getRandomInt(1, 10);
 			for (var i=0; i<numCategories; i++) {
 				var category = {};
 				category.key = "category "+i;
 				category.values = new Array();
-				xDomain.forEach(function(domain){
-					category.values.push({ x: domain, y: getRandomInt(-50, 50) });
-				});
+				for (var j=year; j<=2015; j++) {
+					category.values.push({ x: j, y: getRandomInt(-50, 50) });
+				};
 				newData.push(category);
 			}
 			stackedbar.dataset = newData;

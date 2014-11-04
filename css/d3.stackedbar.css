@@ -10,10 +10,7 @@ body { height: 100%; font-size: 0.875rem; font-family: Arial, sans-serif; }
 #stackedbar {
 	width: 80%;
 	height: 80%;
-	max-height: 400px;
-	max-width: 400px;
-	min-width: 200px;
-	min-height: 200px;
+	
 	position: relative;
 }
 #stackedbar line, #stackedbar path {
