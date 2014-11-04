@@ -3,7 +3,7 @@
 A library of responsive graphs built with D3js and jQuery. 
 
 ##1. D3StackedBar
-D3js stacked bar chart with a support of negative values, responsive design, legends, tooltips, and ability to show data in a table view. Demo is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-stackedbar.html
+D3js stacked bar chart with a support of negative values, responsive design, legends, tooltips, transitions, and ability to show data in a table view. Demo is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-stackedbar.html
 
 ![alt D3StackedBar](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.stackedbar.png)
 
@@ -19,7 +19,7 @@ var stackedbar = new D3StackedBar({
 });
 stackedbar.show();
 ```
-###<a name="data_sctructure"/>1.2 Data Structure
+###1.2 Data Structure
 Data can be obtained from AJAX GET request (if `dataUrl` property is used) or can be directly assigned to a `data` property. Data has to have the following format with all the `values` arrays having the same length:
 ```javascript
 [ 
@@ -82,6 +82,7 @@ Example of default options:
 }	
 ```
 More detailed explanation:
+
 * `container` (String) - identification of a DOM element that should be used as a container for rendering
 * `margin` (Object) - margins in pixels around the graph, useful when we need to set up some space for axes' ticks
 * `barSpacing` (Float) - spacing between bars
