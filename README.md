@@ -20,7 +20,7 @@ var stackedbar = new D3StackedBar({
 stackedbar.show();
 ```
 ###<a name="data_sctructure"/>1.2 Data Structure
-Data can be obtained from AJAX GET request (if `dataUrl` property is used) or can be directly assigned to a `data` property. Data has to have following format with the same length of all `values` array:
+Data can be obtained from AJAX GET request (if `dataUrl` property is used) or can be directly assigned to a `data` property. Data has to have the following format with all the `values` arrays having the same length:
 ```javascript
 [ 
         { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
