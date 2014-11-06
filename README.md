@@ -1,6 +1,10 @@
+[![Tweet Button](./.readme/tweet-button.png?2)](https://twitter.com/intent/tweet?text=%23A%20library%20of%20responsive,%20lightweight,%20and%20reusable%20graphs%20built%20with%20D3js.&url=https://github.com/matoushavlena/D3ResponsiveGraphs&via=matoushavlena)
+
 #D3ResponsiveGraphs
 
-A library of responsive and reusable graphs built with D3js and jQuery. 
+A library of responsive, lightweight, and reusable graphs built with D3js and jQuery (in the next release, jQuery dependency is going to be eliminated). 
+
+##Contents
 
 ##1. D3StackedBar
 D3js stacked bar chart with a support of negative values, responsive design, legends, tooltips, transitions, and ability to show data in a table view. Demo is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-stackedbar.html
