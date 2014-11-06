@@ -1,4 +1,4 @@
-[![Tweet Button](./.readme/tweet-button.png?2)](https://twitter.com/intent/tweet?text=%23A%20library%20of%20responsive,%20lightweight,%20and%20reusable%20graphs%20built%20with%20D3js.&url=https://github.com/matoushavlena/D3ResponsiveGraphs&via=matoushavlena)
+[![Tweet Button](./.readme/tweet-button.png?2)](https://twitter.com/intent/tweet?text=%23D3ResponsiveGraphs%20A%20library%20of%20responsive,%20lightweight,%20and%20reusable%20graphs%20built%20with%20D3js.&url=https://github.com/matoushavlena/D3ResponsiveGraphs&via=matoushavlena)
 
 #D3ResponsiveGraphs
 
