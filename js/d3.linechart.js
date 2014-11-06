@@ -529,4 +529,3 @@ D3LineChart.prototype = {
     		.remove();
 	}
 };
-
