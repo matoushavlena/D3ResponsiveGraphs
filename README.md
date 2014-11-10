@@ -2,44 +2,55 @@
 
 #D3ResponsiveGraphs
 
-A library of responsive, lightweight, and reusable graphs built with D3js and jQuery (in the next release, jQuery dependency is going to be eliminated). 
+A modular library of responsive, lightweight, and reusable graphs built with D3js and jQuery (in the next release, jQuery dependency is going to be eliminated). 
 
 ##Contents
 
-##1. D3StackedBar
-D3js stacked bar chart with a support of negative values, responsive design, legends, tooltips, transitions, and ability to show data in a table view. Demo is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-stackedbar.html
+- [Integration Examples](#integration-examples)
+    - [Quick Start](#quick-start)
+    - [Examples](#examples)
+- [Similar Libraries](#similar-libraries)
+- [Graphs](#graphs)
+	- [Common Methods](#common-methods)
+	- [Common Settings](#common-settings)
+	- [Common Data Structure](#common-data-structure)
+	- [D3StackedBar](#d3stackedbar)
+		- [Usage](#d3stackedbar-usage)
+		- [Specific Settings](#d3stackedbar-settings)
+	- [D3LineChart](#d3linechart)
+	 	- [Usage](#d3linechart-usage)
+		- [Specific Settings](#d3linechart-settings)
 
-![alt D3StackedBar](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.stackedbar.png)
+## Integration Examples
 
-###1.1 Usage
+### Quick Start
+Following is a quick example how to create stacked bar chart.
+
 HTML:
 ```html
 <div id="#stackedbar"></div>
 ```
 Javascript:
-```javascript
+```js
 var stackedbar = new D3StackedBar({ 
 	container: "#stackedbar"
 });
 stackedbar.show();
 ```
-###1.2 Data Structure
-Data can be obtained from AJAX GET request (if `dataUrl` property is used) or can be directly assigned to a `data` property. Data has to have the following format with all the `values` arrays having the same length:
-```javascript
-[ 
-        { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
-        { key: "category 2", values: [{ x: 2013, y: -30 }, { x: 2014, y: 10 } ]},  
-        { key: "category 3", values: [{ x: 2013, y: 30 }, { x: 2014, y: 30 } ]}
-]
-```
 
-###1.3 Methods
+### Examples
+* [D3StackedBar example](http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-stackedbar.html)
+* [D3LineChart example](http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-linechart.html)
+
+## Graphs
+### Common Methods
 * `show()` - renders stackedbar into appropriate HTML container set up in `container` property in options
 * `update()` - updates stackedbar, usually called when the data you want to display has changed. To manipulate data in a graph, use `dataset` property of the graph (for example `stackedbar.dataset = { ... }; stackedbar.update();`)
 * `resize()` - resizes stackedbar to fit it's container, called automatically on window resize if `resizable` option is set to true
+* 
+### Common Settings
 
-###1.4 Options
-Example of default options:
+Example of default settings:
 ```javascript
 {
 	container: "#stackedbar",
@@ -114,3 +125,52 @@ More detailed explanation:
 * `tooltipText` (function) - function that returns String value which is being displayed as a tooltip text
 * `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
 * `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
+### Common Data Strcuture
+Data can be obtained from AJAX GET request (if `dataUrl` property is used) or can be directly assigned to a `data` property. Data has to have the following format with all the `values` arrays having the same length:
+```js
+[ 
+        { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
+        { key: "category 2", values: [{ x: 2013, y: -30 }, { x: 2014, y: 10 } ]},  
+        { key: "category 3", values: [{ x: 2013, y: 30 }, { x: 2014, y: 30 } ]}
+]
+```
+
+### D3StackedBar
+D3js stacked bar chart with a support of negative values, responsive design, legends, tooltips, transitions, and ability to show data in a table view. Example is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-stackedbar.html
+
+![alt D3StackedBar](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.stackedbar.png)
+
+#### Usage
+HTML:
+```html
+<div id="#stackedbar"></div>
+```
+Javascript:
+```js
+var stackedbar = new D3StackedBar({ 
+	container: "#stackedbar"
+});
+stackedbar.show();
+```
+
+#### Specific Settings
+
+### D3LineChart
+D3js line chart with a support of negative values, responsive design, legends, tooltips, transitions, and ability to show data in a table view. Example is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-linechart.html
+
+![alt D3StackedBar](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.stackedbar.png)
+
+#### Usage
+HTML:
+```html
+<div id="#linechart"></div>
+```
+Javascript:
+```js
+var linechart = new D3LineChart({ 
+	container: "#linechart"
+});
+linechart.show();
+```
+
+#### Specific Settings
