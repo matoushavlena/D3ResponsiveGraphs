@@ -20,6 +20,7 @@ A modular library of responsive, lightweight, and reusable graphs built with D3j
 	- [D3LineChart](#d3linechart)
 	 	- [Usage](#usage-1)
 		- [Specific Options](#specific-options-1)
+- [Changelog](#changelog)
 
 ## Integration Examples
 
@@ -172,3 +173,11 @@ linechart.show();
 * `interpolate` (String) - type of line interpolation (see [SVG documentation](https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate))
 * `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
 * `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
+
+## Changelog
+###Version 0.1
+- Added D3LineChart
+- Now modular approach (all the charts inherits default behaviour from D3Core module)
+- Code improvement
+###Version 0.0
+- D3StackedBar
