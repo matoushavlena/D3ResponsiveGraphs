@@ -9,34 +9,8 @@ function D3StackedBar(options) {
 	if (!(this instanceof D3StackedBar)) throw new TypeError("D3StackedBar constructor cannot be called as a function.");
     var defaultOptions = {
 		container: "#stackedbar",
-		margin: {top: 20, left: 50, bottom: 50, right: 20},
 		barSpacing: 0.2,
-		dataUrl: null,
-		data: [ 
-		        { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
-		        { key: "category 2", values: [{ x: 2013, y: -30 }, { x: 2014, y: 10 } ]},  
-		        { key: "category 3", values: [{ x: 2013, y: 30 }, { x: 2014, y: 30 } ]}
-		      ],
-		resizable: true,
-		showLegend: true,
-		showTooltip: true,
-		showRuler: true,
-		showHorizontalGrid: true,
 		verticalText: null,
-		displayTable: true,
-		yFormat: function(d) { return d; },
-		colors: ['rgb(228,26,28)','rgb(55,126,184)','rgb(77,175,74)','rgb(152,78,163)','rgb(255,127,0)','rgb(255,255,51)','rgb(166,86,40)','rgb(247,129,191)','rgb(153,153,153)'],
-   		xTickSize: function(base) { return 10; },
-		yTickSize: function(base) { return 10; },
-		xTicks: 5,
-		yTicks: 5,
-		xTickPadding: 5,
-		yTickPadding: 5,
-		yAxisTranslate: function(base) { return "translate(0,0)"; },
-		xAxisTranslate: function(base) { return "translate(0,"+base.height+")"; },
-		xTickFormat: function(d) { return d; },
-		yTickFormat: function(d) { return d; },
-		tooltipText: function(d, element) { return "<p>Tooltip<br />x: "+d.x+"<br />y:"+d.y+"<p>"; },
 		tooltipOnMouseOver: function(d, element, base) { 		    
 			var xPosition = parseInt($(element).attr("x")) + parseInt($(element).attr("width"))/2-base.tooltipWidth/2+base.options.margin.left;
 			var yPosition = base.y.range()[0]-parseInt($(element).attr("y"))+base.options.margin.bottom+5;
@@ -52,8 +26,111 @@ function D3StackedBar(options) {
 	}	
 	if (typeof options == 'object') this.options = $.extend(defaultOptions, options);
 	else this.options = defaultOptions;
+    D3Core.call(this, this.options);
 }
 
+inheritPrototype(D3StackedBar, D3Core);
+
+D3StackedBar.prototype.prepareItem = function() {
+	this.item = this.category.selectAll("rect")
+		.data(function(d) { return d.values; });
+}
+
+D3StackedBar.prototype.itemEnter = function() {
+	var base = this;
+	base.item
+		.enter().append("rect")
+		.attr("x", function(d) { return base.x(d.x); })
+		.attr("original-x", function(d) { return d.x; })
+		.attr("original-y", function(d) { return d.y; })
+		.attr("y", function(d) { return base.height; })   
+		.attr("width", base.x.rangeBand())
+		.attr("height", 0)
+		.attr("class", "rect")
+		.transition().delay(300).duration(500).ease("cubic-in-out")
+		.attr("height", function(d) { return base.y(0)-base.y(d.size); })
+		.attr("y", function(d) { return base.y(d.y0); });
+}
+
+D3StackedBar.prototype.itemUpdate = function() {
+	var base = this;
+	base.item
+		.attr("original-x", function(d) { return d.x; })
+		.attr("original-y", function(d) { return d.y; })	
+		.transition().duration(500).ease("cubic-in-out")
+		.attr("x", function(d) { return base.x(d.x); })
+		.attr("y", function(d) { return base.y(d.y0); })
+		.attr("height", function(d) { return base.y(0)-base.y(d.size); })
+		.attr("width", base.x.rangeBand());
+}
+
+D3StackedBar.prototype.itemExit = function() {
+	var base = this;
+	base.item.exit()
+	    .transition().duration(300).ease("cubic-in-out")
+	    .attr("height", 0)
+	    .attr("y", function(d) { return base.height; })  
+	    .remove();
+}
+
+D3StackedBar.prototype.tooltipRender = function() {
+	var base = this;
+	base.item.on("mouseover", function(d) { base.options.tooltipOnMouseOver(d, this, base); });
+	base.item.on("mouseout", function(d) { base.options.tooltipOnMouseOut(d, this, base); });
+}
+
+D3StackedBar.prototype.showVerticalText = function() {
+	this.svg.append("text")
+		.attr("transform", "rotate(-90)")
+		.attr("y", 6)
+		.attr("dy", ".71em")
+		.style("text-anchor", "end")
+		.text(this.options.verticalText);
+}
+
+D3StackedBar.prototype.render = function() {
+	D3Core.prototype.render.apply(this);
+	if (this.options.verticalText!=null) this.showVerticalText();
+}
+
+D3StackedBar.prototype.prepare = function() {
+	D3Core.prototype.prepare.apply(this);
+	var base = this;
+    this.barStack = function(data) {
+        var i = base.x.domain().length;
+        while (i--) {
+            var posBase = 0, negBase = 0;
+            data.forEach(function(category) {
+                var item = category.values[i]
+                item.size = Math.abs(item.y);
+                if (item.y < 0) {
+                    item.y0 = negBase;
+                    negBase -= item.size;
+                } else {
+                    posBase += item.size;
+                    item.y0 = posBase;
+                }
+            });
+        }
+        data.extent = d3.extent(d3.merge(d3.merge(data.map(function(category) {
+            return category.values.map(function(item) {
+                return [item.y0, item.y0 - item.size]
+            })
+        }))));
+        return data;
+    };
+    this.x = d3.scale.ordinal().rangeRoundBands([0, this.width], this.options.barSpacing);
+}
+
+D3StackedBar.prototype.prepareScales = function() {
+	var base = this;
+	base.x.domain(base.dataset[0].values.map(function(d) { return d.x; }));
+	console.log(base.color.range());
+	base.categories = base.barStack(base.dataset);
+	base.color.domain(base.dataset.map(function(item) { return item.key; }));
+	base.y.domain(base.dataset.extent);
+}
+/*
 D3StackedBar.prototype = {
 	
 	constructor: D3StackedBar,
@@ -522,5 +599,5 @@ D3StackedBar.prototype = {
     		.remove();
 	}
 	
-};
+};*/
 

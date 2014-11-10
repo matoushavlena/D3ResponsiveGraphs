@@ -1,4 +1,11 @@
- function inheritPrototype(childObject, parentObject) {
+/*
+ * D3ResponsiveGraphs - D3Core
+ * Author: Matous Havlena (matous@havlena.net)
+ * www.havlena.net/en
+ * @matoushavlena
+ */ 
+
+function inheritPrototype(childObject, parentObject) {
 	var copyOfParent = Object.create(parentObject.prototype);
 	copyOfParent.constructor = childObject;
 	childObject.prototype = copyOfParent;
@@ -13,8 +20,8 @@ function D3Core(options) {
 		dataUrl: null,
 		data: [ 
 		        { key: "category 1", values: [ { x: "FY2008", y: 10 }, { x: "FY2009", y: 20 }, { x: "FY2010", y: 30 }, { x: "FY2011", y: 5 }, { x: "FY2012", y: 15 } ]}, 
-		        { key: "category 2", values: [ { x: "FY2008", y: 20 }, { x: "FY2009", y: 40 }, { x: "FY2010", y: 20 }, { x: "FY2011", y: 5 }, { x: "FY2012", y: 10 } ]}, 
-		        { key: "category 3", values: [ { x: "FY2008", y: -10 }, { x: "FY2009", y: 10 }, { x: "FY2010", y: 10 }, { x: "FY2011", y: 10 }, { x: "FY2012", y: 10 } ]}, 
+		        { key: "category 2", values: [ { x: "FY2008", y: 20 }, { x: "FY2009", y: -40 }, { x: "FY2010", y: 20 }, { x: "FY2011", y: 5 }, { x: "FY2012", y: 10 } ]}, 
+		        { key: "category 3", values: [ { x: "FY2008", y: -10 }, { x: "FY2009", y: 10 }, { x: "FY2010", y: 10 }, { x: "FY2011", y: -10 }, { x: "FY2012", y: 10 } ]}, 
 		      ],
 		resizable: true,
 		showLegend: true,
@@ -22,6 +29,7 @@ function D3Core(options) {
 		showRuler: true,
 		showHorizontalGrid: true,
 		displayTable: true,
+		yFormat: function(d) { return d; },
 		colors: ['rgb(166,206,227)','rgb(31,120,180)','rgb(178,223,138)','rgb(51,160,44)','rgb(251,154,153)','rgb(227,26,28)','rgb(253,191,111)','rgb(255,127,0)','rgb(202,178,214)','rgb(106,61,154)','rgb(255,255,153)','rgb(177,89,40)'],
    		xTickSize: function(base) { return 10; },
 		yTickSize: function(base) { return 10; },
@@ -54,11 +62,6 @@ D3Core.prototype = {
 	    this.noData = null;
 	    
 	    if (this.options.showRuler) this.prepareAxes();
-	    
-	    this.lineLayout = d3.svg.line()
-	        .interpolate(this.options.interpolate)
-	        .x(function(d) { return base.x(d.x); })
-	        .y(function(d) { return base.y(d.y); });
 	    
 	    if (this.options.showTooltip) {
 	    	$(this.options.container).append("<div class='tooltip' style='display: none;' />");
@@ -355,7 +358,8 @@ D3Core.prototype = {
 		base.category
 			.enter().append("g")
 			.attr("class", "category")
-			.attr("original-key", function(d, i) { return d.key; });
+			.attr("original-key", function(d, i) { return d.key; })
+			.style("fill", function(d, i) { return base.color(d.key); });
 	},
 	
 	categoryUpdate: function() {
