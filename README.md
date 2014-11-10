@@ -169,6 +169,6 @@ linechart.show();
 #### Specific Options
 * `spacing` (float) - left and right horizontal spacing
 * `verticalText` (String) - text describing the y units, if set to null, nothing is displayed
-* `interpolate` (String) - type of line interpolation (see [SVG documentation](https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate)
+* `interpolate` (String) - type of line interpolation (see [SVG documentation](https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate))
 * `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
 * `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
