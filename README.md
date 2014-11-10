@@ -12,7 +12,7 @@ A modular library of responsive, lightweight, and reusable graphs built with D3j
 - [Similar Libraries](#similar-libraries)
 - [Graphs](#graphs)
 	- [Common Methods](#common-methods)
-	- [Common options](#common-options)
+	- [Common Options](#common-options)
 	- [Common Data Structure](#common-data-structure)
 	- [D3StackedBar](#d3stackedbar)
 		- [Usage](#d3stackedbar-usage)
@@ -125,7 +125,8 @@ More detailed explanation:
 * `tooltipText` (function) - function that returns String value which is being displayed as a tooltip text
 * `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
 * `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
-### Common Data Strcuture
+
+### Common Data Structure
 Data can be obtained from AJAX GET request (if `dataUrl` property is used) or can be directly assigned to a `data` property. Data has to have the following format with all the `values` arrays having the same length:
 ```js
 [ 
