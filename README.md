@@ -175,9 +175,10 @@ linechart.show();
 * `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
 
 ## Changelog
-###Version 0.1
-- Added D3LineChart
-- Now modular approach (all the charts inherits default behaviour from D3Core module)
-- Code improvement
-###Version 0.0
-- D3StackedBar
+### Version 0.1
+* Added D3LineChart
+* Now modular approach (all the charts inherits default behaviour from D3Core module)
+* Code improvement
+
+### Version 0.0
+* Added D3StackedBar
