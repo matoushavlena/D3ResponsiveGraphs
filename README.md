@@ -159,7 +159,7 @@ stackedbar.show();
 ### D3LineChart
 D3js line chart with a support of negative values, responsive design, legends, tooltips, transitions, and ability to show data in a table view. Example is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-linechart.html
 
-![alt D3StackedBar](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.stackedbar.png)
+![alt D3StackedBar](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.linechart.png)
 
 #### Usage
 HTML:
