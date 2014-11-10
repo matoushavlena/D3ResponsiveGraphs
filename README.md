@@ -177,7 +177,7 @@ linechart.show();
 ## Changelog
 ### Version 0.1
 * Added D3LineChart
-* Now modular approach (all the charts inherits default behaviour from D3Core module)
+* Now modular approach (all the charts inherit default behaviour from D3Core module)
 * Code improvement
 
 ### Version 0.0
