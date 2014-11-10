@@ -42,6 +42,9 @@ stackedbar.show();
 * [D3StackedBar example](http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-stackedbar.html)
 * [D3LineChart example](http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-linechart.html)
 
+## Similar Libraries
+I'm currently working on this section. Stay tuned pls.
+
 ## Graphs
 ### Common Methods
 * `show()` - renders chart into an appropriate HTML container set up in `container` property in options
