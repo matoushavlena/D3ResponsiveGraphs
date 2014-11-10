@@ -56,13 +56,14 @@ I'm currently working on this section. Stay tuned pls.
 Example of default options:
 ```javascript
 {
-	container: "#stackedbar",
+	container: "#chart",
 	margin: {top: 20, left: 50, bottom: 50, right: 20},
+	spacing: 0.5,
 	dataUrl: null,
 	data: [ 
-	        { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
-	        { key: "category 2", values: [{ x: 2013, y: -30 }, { x: 2014, y: 10 } ]},  
-	        { key: "category 3", values: [{ x: 2013, y: 30 }, { x: 2014, y: 30 } ]}
+	        { key: "category 1", values: [ { x: "FY2008", y: 10 }, { x: "FY2009", y: 20 }, { x: "FY2010", y: 30 }, { x: "FY2011", y: 5 }, { x: "FY2012", y: 15 } ]}, 
+	        { key: "category 2", values: [ { x: "FY2008", y: 20 }, { x: "FY2009", y: -40 }, { x: "FY2010", y: 20 }, { x: "FY2011", y: 5 }, { x: "FY2012", y: 10 } ]}, 
+	        { key: "category 3", values: [ { x: "FY2008", y: -10 }, { x: "FY2009", y: 10 }, { x: "FY2010", y: 10 }, { x: "FY2011", y: -10 }, { x: "FY2012", y: 10 } ]}, 
 	      ],
 	resizable: true,
 	showLegend: true,
@@ -82,20 +83,8 @@ Example of default options:
 	xAxisTranslate: function(base) { return "translate(0,"+base.height+")"; },
 	xTickFormat: function(d) { return d; },
 	yTickFormat: function(d) { return d; },
-	tooltipText: function(d, element) { return "<p>Tooltip<br />x: "+d.x+"<br />y:"+d.y+"<p>"; },
-	tooltipOnMouseEnter: function(d, element, base) { 		    
-		var xPosition = parseInt($(element).attr("x")) + parseInt($(element).attr("width"))/2-base.tooltipWidth/2+base.options.margin.left;
-		var yPosition = base.y.range()[0]-parseInt($(element).attr("y"))+base.options.margin.bottom+5;
-		d3.select(base.options.container+" .tooltip")
-			.style("left", xPosition + "px")
-			.style("bottom", yPosition + "px")	
-			.html(base.options.tooltipText(d, element));
-		$(base.options.container+" .tooltip").show();
-	},
-	tooltipOnMouseOut: function(d, element, base) {
-		$(base.options.container+" .tooltip").hide();
-	}
-}	
+	tooltipText: function(d, element) { return "<p>Tooltip<br />x: "+d.x+"<br />y:"+d.y+"<p>"; }
+}		
 ```
 More detailed explanation:
 
