@@ -58,7 +58,6 @@ Example of default options:
 {
 	container: "#stackedbar",
 	margin: {top: 20, left: 50, bottom: 50, right: 20},
-	barSpacing: 0.2,
 	dataUrl: null,
 	data: [ 
 	        { key: "category 1", values: [{ x: 2013, y: -10 }, { x: 2014, y: 10 } ]}, 
@@ -70,7 +69,6 @@ Example of default options:
 	showTooltip: true,
 	showRuler: true,
 	showHorizontalGrid: true,
-	verticalText: null,
 	displayTable: true,
 	yFormat: function(d) { return d; },
 	colors: ['rgb(166,206,227)','rgb(31,120,180)','rgb(178,223,138)','rgb(51,160,44)','rgb(251,154,153)','rgb(227,26,28)','rgb(253,191,111)','rgb(255,127,0)','rgb(202,178,214)','rgb(106,61,154)','rgb(255,255,153)','rgb(177,89,40)'],
@@ -103,7 +101,6 @@ More detailed explanation:
 
 * `container` (String) - identification of a DOM element that should be used as a container for rendering
 * `margin` (Object) - margins in pixels around the graph, useful when we need to set up some space for axes' ticks
-* `barSpacing` (Float) - spacing between bars
 * `dataUrl` (String) - url of a data service from where we want to get data, using AJAX GET. If the value is null, we render data stored in a `data` property (below)
 * `data` (Object) - data object used to render, it must have a specifi format described [above](#12-data-structure)
 * `resizable` (boolean) - if set to true, resize() method is gonna be called everytime $(window).on('resize') event is triggered
@@ -111,7 +108,6 @@ More detailed explanation:
 * `showTooltip` (boolean) - if set to true, on mouse over tooltip is going to be displayed
 * `showRuler` (boolean) - if set to true, x and y axes are going to be displayed together with ruler
 * `showHorizontalGrid` (boolean) - if set to true, horizontal grid is going to be displayed
-* `verticalText` (String) - text describing the y units, if set to null, nothing is displayed
 * `displayTable` (boolean) - if set to true, the graph could be converted to a table view
 * `yFormat` (function) - function that can modify/format y values
 * `colors` (Array) - array of colors that are used as background colors for bars (in the given order), can be represented by RGBA or HEX
@@ -158,6 +154,10 @@ stackedbar.show();
 ```
 
 #### Specific Options
+* `barSpacing` (Float) - spacing between bars
+* `verticalText` (String) - text describing the y units, if set to null, nothing is displayed
+* `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
+* `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
 
 ### D3LineChart
 D3js line chart with a support of negative values, responsive design, legends, tooltips, transitions, and ability to show data in a table view. Example is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-linechart.html
@@ -178,3 +178,8 @@ linechart.show();
 ```
 
 #### Specific Options
+* `spacing` (float) - left and right horizontal spacing
+* `verticalText` (String) - text describing the y units, if set to null, nothing is displayed
+* `interpolate` (String) - type of line interpolation (see [SVG documentation](https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate)
+* `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
+* `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
