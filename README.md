@@ -12,14 +12,14 @@ A modular library of responsive, lightweight, and reusable graphs built with D3j
 - [Similar Libraries](#similar-libraries)
 - [Graphs](#graphs)
 	- [Common Methods](#common-methods)
-	- [Common Settings](#common-settings)
+	- [Common options](#common-options)
 	- [Common Data Structure](#common-data-structure)
 	- [D3StackedBar](#d3stackedbar)
 		- [Usage](#d3stackedbar-usage)
-		- [Specific Settings](#d3stackedbar-settings)
+		- [Specific Options](#d3stackedbar-options)
 	- [D3LineChart](#d3linechart)
 	 	- [Usage](#d3linechart-usage)
-		- [Specific Settings](#d3linechart-settings)
+		- [Specific Options](#d3linechart-options)
 
 ## Integration Examples
 
@@ -44,13 +44,13 @@ stackedbar.show();
 
 ## Graphs
 ### Common Methods
-* `show()` - renders stackedbar into appropriate HTML container set up in `container` property in options
-* `update()` - updates stackedbar, usually called when the data you want to display has changed. To manipulate data in a graph, use `dataset` property of the graph (for example `stackedbar.dataset = { ... }; stackedbar.update();`)
-* `resize()` - resizes stackedbar to fit it's container, called automatically on window resize if `resizable` option is set to true
-* 
-### Common Settings
+* `show()` - renders chart into an appropriate HTML container set up in `container` property in options
+* `update()` - updates chart, usually called when the data you want to display has changed. To manipulate data in a graph, use `dataset` property of the graph (for example `stackedbar.dataset = { ... }; stackedbar.update();`)
+* `resize()` - resizes chart to fit it's container, called automatically on window resize if `resizable` option is set to true
 
-Example of default settings:
+### Common Options
+
+Example of default options:
 ```javascript
 {
 	container: "#stackedbar",
@@ -153,7 +153,7 @@ var stackedbar = new D3StackedBar({
 stackedbar.show();
 ```
 
-#### Specific Settings
+#### Specific Options
 
 ### D3LineChart
 D3js line chart with a support of negative values, responsive design, legends, tooltips, transitions, and ability to show data in a table view. Example is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-linechart.html
@@ -173,4 +173,4 @@ var linechart = new D3LineChart({
 linechart.show();
 ```
 
-#### Specific Settings
+#### Specific Options
