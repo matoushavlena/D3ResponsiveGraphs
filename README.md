@@ -15,11 +15,11 @@ A modular library of responsive, lightweight, and reusable graphs built with D3j
 	- [Common Options](#common-options)
 	- [Common Data Structure](#common-data-structure)
 	- [D3StackedBar](#d3stackedbar)
-		- [Usage](#d3stackedbar-usage)
-		- [Specific Options](#d3stackedbar-options)
+		- [Usage](#usage)
+		- [Specific Options](#specific-options)
 	- [D3LineChart](#d3linechart)
-	 	- [Usage](#d3linechart-usage)
-		- [Specific Options](#d3linechart-options)
+	 	- [Usage](#usage-1)
+		- [Specific Options](#specific-options-1)
 
 ## Integration Examples
 
