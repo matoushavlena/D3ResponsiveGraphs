@@ -144,7 +144,7 @@ stackedbar.show();
 ```
 
 #### Specific Options
-* `barSpacing` (Float) - spacing between bars
+* `spacing` (Float) - spacing between bars
 * `verticalText` (String) - text describing the y units, if set to null, nothing is displayed
 * `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
 * `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
