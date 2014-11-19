@@ -9,7 +9,7 @@ function D3StackedBar(options) {
 	if (!(this instanceof D3StackedBar)) throw new TypeError("D3StackedBar constructor cannot be called as a function.");
     var defaultOptions = {
 		container: "#stackedbar",
-		barSpacing: 0.2,
+		spacing: 0.2,
 		verticalText: null,
 		tooltipOnMouseOver: function(d, element, base) { 		    
 			var xPosition = parseInt($(element).attr("x")) + parseInt($(element).attr("width"))/2-base.tooltipWidth/2+base.options.margin.left;
@@ -119,7 +119,19 @@ D3StackedBar.prototype.prepare = function() {
         }))));
         return data;
     };
-    this.x = d3.scale.ordinal().rangeRoundBands([0, this.width], this.options.barSpacing);
+    this.x = d3.scale.ordinal().rangeRoundBands([0, this.width], this.options.spacing);
+}
+
+D3StackedBar.prototype.resize = function() {
+	this.width = $(this.options.container).width() - this.margin.left - this.margin.right;
+    this.height = $(this.options.container).height() - this.margin.top - this.margin.bottom;
+    d3.select(this.options.container).select("svg").style('width', (this.width+this.margin.left+this.margin.right) + 'px').style('height', (this.height+this.margin.bottom+this.margin.top) + 'px');
+    this.x = d3.scale.ordinal().rangeRoundBands([0, this.width], this.options.spacing);
+    this.y = d3.scale.linear().range([this.height, 0]);
+	this.prepareScales();
+	if (this.options.showRuler) this.prepareAxes();
+    this.itemUpdate();
+    this.axesUpdate();
 }
 
 D3StackedBar.prototype.prepareScales = function() {
