@@ -1,10 +1,3 @@
-/*
- * D3ResponsiveGraphs - D3LineChart
- * Author: Matous Havlena (matous@havlena.net)
- * www.havlena.net/en
- * @matoushavlena
- */
-
 function D3LineChart(options) {
 	if (!(this instanceof D3LineChart)) throw new TypeError("D3LineChart constructor cannot be called as a function.");
 	var defaultOptions = {

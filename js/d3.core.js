@@ -1,10 +1,3 @@
-/*
- * D3ResponsiveGraphs - D3Core
- * Author: Matous Havlena (matous@havlena.net)
- * www.havlena.net/en
- * @matoushavlena
- */ 
-
 function inheritPrototype(childObject, parentObject) {
 	var copyOfParent = Object.create(parentObject.prototype);
 	copyOfParent.constructor = childObject;
@@ -56,12 +49,7 @@ D3Core.prototype = {
 		this.margin = this.options.margin;
 	    this.width = $(this.options.container).width() - this.margin.left - this.margin.right;
 	    this.height = $(this.options.container).height() - this.margin.top - this.margin.bottom;
-	    this.x = d3.scale.ordinal().rangePoints([0, this.width], this.options.spacing);
-	    this.y = d3.scale.linear().range([this.height, 0]);
-	    this.color = d3.scale.ordinal().range(this.options.colors);
 	    this.noData = null;
-	    
-	    if (this.options.showRuler) this.prepareAxes();
 	    
 	    if (this.options.showTooltip) {
 	    	$(this.options.container).append("<div class='tooltip' style='display: none;' />");
@@ -217,7 +205,6 @@ D3Core.prototype = {
         this.x = d3.scale.ordinal().rangePoints([0, this.width], this.options.spacing);
         this.y = d3.scale.linear().range([this.height, 0]);
 		this.prepareScales();
-		if (this.options.showRuler) this.prepareAxes();
         this.itemUpdate();
         this.axesUpdate();
 	},
@@ -225,6 +212,11 @@ D3Core.prototype = {
 	prepareScales: function() {
 		var base = this;
     	
+	    this.x = d3.scale.ordinal().rangePoints([0, this.width], this.options.spacing);
+	    this.y = d3.scale.linear().range([this.height, 0]);
+	    this.color = d3.scale.ordinal().range(this.options.colors);
+	    if (this.options.showRuler) this.prepareAxes();
+		
     	base.color.domain(base.dataset.map(function(item) { return item.key; }));
     	base.x.domain(base.dataset[0].values.map(function(d) { return d.x; }));
     	var minValues = [

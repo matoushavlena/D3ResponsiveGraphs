@@ -1,7 +1,7 @@
-function D3StackedBar(options) {
-	if (!(this instanceof D3StackedBar)) throw new TypeError("D3StackedBar constructor cannot be called as a function.");
+function D3StackedArea(options) {
+	if (!(this instanceof D3StackedArea)) throw new TypeError("D3StackedArea constructor cannot be called as a function.");
     var defaultOptions = {
-		container: "#stackedbar",
+		container: "#stackedarea",
 		spacing: 0.2,
 		verticalText: null,
 		tooltipOnMouseOver: function(d, element, base) { 		    
@@ -22,14 +22,14 @@ function D3StackedBar(options) {
     D3Core.call(this, this.options);
 }
 
-inheritPrototype(D3StackedBar, D3Core);
+inheritPrototype(D3StackedArea, D3Core);
 
-D3StackedBar.prototype.prepareItem = function() {
+D3StackedArea.prototype.prepareItem = function() {
 	this.item = this.category.selectAll("rect")
 		.data(function(d) { return d.values; });
 }
 
-D3StackedBar.prototype.itemEnter = function() {
+D3StackedArea.prototype.itemEnter = function() {
 	var base = this;
 	base.item
 		.enter().append("rect")
@@ -45,7 +45,7 @@ D3StackedBar.prototype.itemEnter = function() {
 		.attr("y", function(d) { return base.y(d.y0); });
 }
 
-D3StackedBar.prototype.itemUpdate = function() {
+D3StackedArea.prototype.itemUpdate = function() {
 	var base = this;
 	base.item
 		.attr("original-x", function(d) { return d.x; })
@@ -57,7 +57,7 @@ D3StackedBar.prototype.itemUpdate = function() {
 		.attr("width", base.x.rangeBand());
 }
 
-D3StackedBar.prototype.itemExit = function() {
+D3StackedArea.prototype.itemExit = function() {
 	var base = this;
 	base.item.exit()
 	    .transition().duration(300).ease("cubic-in-out")
@@ -66,64 +66,41 @@ D3StackedBar.prototype.itemExit = function() {
 	    .remove();
 }
 
-D3StackedBar.prototype.showVerticalText = function() {
-	this.svg.append("text")
-		.attr("transform", "rotate(-90)")
-		.attr("y", 6)
-		.attr("dy", ".71em")
-		.style("text-anchor", "end")
-		.text(this.options.verticalText);
+D3StackedArea.prototype.tooltipRender = function() {
+	var base = this;
+	base.item.on("mouseover", function(d) { base.options.tooltipOnMouseOver(d, this, base); });
+	base.item.on("mouseout", function(d) { base.options.tooltipOnMouseOut(d, this, base); });
 }
 
-D3StackedBar.prototype.render = function() {
-	D3Core.prototype.render.apply(this);
-	if (this.options.verticalText!=null) this.showVerticalText();
+D3StackedArea.prototype.prepare = function() {
+	D3Core.prototype.prepare.apply(this);
+	var base = this;
+    this.x = d3.time.scale().range([0, this.width]);
+    this.parseDate = d3.time.format("%Y-%-m-%-d").parse;
+	this.stack = d3.layout.stack().values(function(d) { return d.values; });
+    this.area = d3.svg.area()
+    	.interpolate("basis") 
+        .x(function(d) { return base.x(d.date); })
+        .y0(function(d) { return base.y(d.y0); })
+        .y1(function(d) { return base.y(d.y0 + d.y); });
 }
 
-D3StackedBar.prototype.resize = function() {
+D3StackedArea.prototype.resize = function() {
 	this.width = $(this.options.container).width() - this.margin.left - this.margin.right;
     this.height = $(this.options.container).height() - this.margin.top - this.margin.bottom;
     d3.select(this.options.container).select("svg").style('width', (this.width+this.margin.left+this.margin.right) + 'px').style('height', (this.height+this.margin.bottom+this.margin.top) + 'px');
     this.x = d3.scale.ordinal().rangeRoundBands([0, this.width], this.options.spacing);
     this.y = d3.scale.linear().range([this.height, 0]);
 	this.prepareScales();
+	if (this.options.showRuler) this.prepareAxes();
     this.itemUpdate();
     this.axesUpdate();
 }
 
-D3StackedBar.prototype.prepareScales = function() {
+D3StackedArea.prototype.prepareScales = function() {
 	var base = this;
-	
-	this.x = d3.scale.ordinal().rangeRoundBands([0, this.width], this.options.spacing);
-    this.y = d3.scale.linear().range([this.height, 0]);
-    this.color = d3.scale.ordinal().range(this.options.colors);
-    if (this.options.showRuler) this.prepareAxes();
-	
-    this.barStack = function(data) {
-        var i = base.x.domain().length;
-        while (i--) {
-            var posBase = 0, negBase = 0;
-            data.forEach(function(category) {
-                var item = category.values[i]
-                item.size = Math.abs(item.y);
-                if (item.y < 0) {
-                    item.y0 = negBase;
-                    negBase -= item.size;
-                } else {
-                    posBase += item.size;
-                    item.y0 = posBase;
-                }
-            });
-        }
-        data.extent = d3.extent(d3.merge(d3.merge(data.map(function(category) {
-            return category.values.map(function(item) {
-                return [item.y0, item.y0 - item.size]
-            })
-        }))));
-        return data;
-    };
-    
 	base.x.domain(base.dataset[0].values.map(function(d) { return d.x; }));
+	console.log(base.color.range());
 	base.categories = base.barStack(base.dataset);
 	base.color.domain(base.dataset.map(function(item) { return item.key; }));
 	base.y.domain(base.dataset.extent);
