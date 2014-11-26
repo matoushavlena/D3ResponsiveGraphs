@@ -1,0 +1,110 @@
+/*
+ * D3ResponsiveGraphs - D3StackedBar
+ * Author: Matous Havlena (matous@havlena.net)
+ * www.havlena.net/en
+ * @matoushavlena
+ */
+
+html { height: 100%; }
+body { height: 100%; font-size: 0.875rem; font-family: Arial, sans-serif; }
+#donutchart {
+	width: 80%;
+	height: 80%;
+	position: relative;
+}
+#donutchart path { 
+	opacity: 0.7;
+	-moz-transition-property: all;
+	-o-transition-property: all;
+	-webkit-transition-property: all;
+	transition-property: all;
+	-moz-transition-duration: 0.2s;
+	-o-transition-duration: 0.2s;
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+	-moz-transition-timing-function: ease-in-out;
+	-o-transition-timing-function: ease-in-out;
+	-webkit-transition-timing-function: ease-in-out;
+	transition-timing-function: ease-in-out;
+}
+#donutchart path:hover { 
+	cursor: pointer; 
+	opacity: 1;
+}
+
+/* TOOLTIP */
+#donutchart .tooltip {
+	position: absolute;
+	width: 250px;
+	-moz-border-radius: 0.375rem;
+	-webkit-border-radius: 0.375rem;
+	border-radius: 0.375rem;
+	background: #333;
+	color: #fff;
+	padding: 0.25rem 0.5rem;
+	z-index: 10000;
+	opacity: 0.9;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	text-align: center;
+}
+#donutchart .tooltip:after {
+	content: "";
+	position: absolute;
+	bottom: -10px;
+	right: 115px;
+	border: solid;
+	border-color: #333 transparent;
+	border-width: 12px 12px 0 12px;
+	display: block;
+	width: 0;
+}
+#donutchart .tooltip p { padding: 0.175rem; margin: 0; }
+
+/* LEGEND */
+#donutchart .legend {
+	right: -200px;
+	position: absolute;
+	top: 3rem;
+	width: 200px;
+	text-align: left;
+	max-height: 300px;
+	overflow-y: auto;
+	padding: 0.5rem 0 0.25rem 0;
+}
+#donutchart .legend ul { margin: 0; padding: 0; }		
+#donutchart .legend ul li {
+	list-style-type: none;
+    border-left-width: 15px;
+    border-left-style: solid;
+    padding-left: 0.5rem;
+    margin-bottom: 0.175rem;
+}
+#donutchart .showTableIcon {
+	right: -200px;
+	width: 200px;
+    position: absolute;
+    top: 1rem;
+    padding: 0.5rem 0;
+    color: #000;
+}
+#donutchart div.table {
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 1rem;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background: #fff;
+}
+
+/* TABLE */
+#donutchart div.table table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+#donutchart div.table table td { color: #666; text-align: right; padding: 0.25rem 0.5rem; }
+#donutchart div.table table th { color: #666; font-weight: normal; padding: 0.25rem 0.5rem; text-align: left; }
+#donutchart div.table table thead th { text-align: right; color: #000; background: #aaa; }
+#donutchart div.table table tr:nth-child(2n) > * { background: #eee; }
+
+#button { font-size: 1rem; }

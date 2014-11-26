@@ -1,0 +1,51 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>D3StackedBar</title>
+ 	<meta name="description" content="Demo example of D3Donut">
+	<meta name="author" content="Matous Havlena (@matoushavlena)">
+
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	
+	<link rel="stylesheet" href="./css/d3.piechart.css">
+	<script src="./js/d3.core.js" charset="utf-8"></script>
+	<script src="./js/d3.donutchart.js" charset="utf-8"></script>
+	<script src="./js/d3.piechart.js" charset="utf-8"></script>
+</head>
+
+<body>
+	<div id="piechart"></div>
+	<button id="button">Generate Random Dataset</button>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var piechart = new D3PieChart({ 
+			container: "#piechart"
+		});
+		piechart.show();
+		
+		$("#button").on("click", function() {
+			var newData = new Array();
+			var numCategories = getRandomInt(1, 10);
+			for (var i=0; i<numCategories; i++) {
+				var category = {};
+				category.key = "category "+i;
+				category.value = getRandomInt(0, 150);
+				newData.push(category);
+			}
+			piechart.dataset = newData;
+			piechart.update();
+		});
+		
+		function getRandomInt(min, max) {
+		    return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+	});
+	</script>
+	
+</body>
+</html>

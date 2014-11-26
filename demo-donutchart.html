@@ -11,37 +11,33 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	
-	<link rel="stylesheet" href="./css/d3.donut.css">
+	<link rel="stylesheet" href="./css/d3.donutchart.css">
 	<script src="./js/d3.core.js" charset="utf-8"></script>
-	<script src="./js/d3.donut.js" charset="utf-8"></script>
+	<script src="./js/d3.donutchart.js" charset="utf-8"></script>
 </head>
 
 <body>
-	<div id="donut"></div>
+	<div id="donutchart"></div>
 	<button id="button">Generate Random Dataset</button>
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
-		var donut = new D3Donut({ 
-			container: "#donut"
+		var donutchart = new D3DonutChart({ 
+			container: "#donutchart"
 		});
-		donut.show();
+		donutchart.show();
 		
 		$("#button").on("click", function() {
-			/*var newData = new Array();
-			var year = getRandomInt(2005, 2014);
+			var newData = new Array();
 			var numCategories = getRandomInt(1, 10);
 			for (var i=0; i<numCategories; i++) {
 				var category = {};
 				category.key = "category "+i;
-				category.values = new Array();
-				for (var j=year; j<=2015; j++) {
-					category.values.push({ x: j, y: getRandomInt(-50, 50) });
-				};
+				category.value = getRandomInt(0, 150);
 				newData.push(category);
 			}
-			stackedbar.dataset = newData;
-			stackedbar.update();*/
+			donutchart.dataset = newData;
+			donutchart.update();
 		});
 		
 		function getRandomInt(min, max) {

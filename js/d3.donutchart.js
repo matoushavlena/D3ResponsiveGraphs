@@ -1,8 +1,8 @@
-function D3Donut(options) {
-	if (!(this instanceof D3Donut)) throw new TypeError("D3Donut constructor cannot be called as a function.");
+function D3DonutChart(options) {
+	if (!(this instanceof D3DonutChart)) throw new TypeError("D3DonutChart constructor cannot be called as a function.");
     var defaultOptions = {
 		container: "#donut",
-		data: [ { key: "group 1", value: 55 }, { key: "group 2", value: 25 }, { key: "group 3", value: 20 } ],
+		data: [ { key: "category 1", value: 55 }, { key: "category 2", value: 25 }, { key: "category 3", value: 20 } ],
 		innerRatio: 0.8,
 		outerRatio: 0.4,
 		showInnerCircle: false,
@@ -21,7 +21,8 @@ function D3Donut(options) {
 		},
 		tooltipOnMouseOut: function(d, element, base) {
 			$(base.options.container+" .tooltip").hide();
-		}
+		},
+		tooltipText: function(d, element) { return "<p>Tooltip<br />value: "+$(element).attr("original-value")+"<p>"; }
 	}	
 	if (typeof options == 'object') this.options = $.extend(defaultOptions, options);
 	else this.options = defaultOptions;
@@ -29,20 +30,20 @@ function D3Donut(options) {
     D3Core.call(this, this.options);
 }
 
-inheritPrototype(D3Donut, D3Core);
+inheritPrototype(D3DonutChart, D3Core);
 
-D3Donut.prototype.prepareCategory = function() { 
+D3DonutChart.prototype.prepareCategory = function() { 
 	var base = this;
 	this.category = this.svg.selectAll(".category")
 		.data(base.pie(base.dataset));
 }
 
-D3Donut.prototype.prepareItem = function() {
+D3DonutChart.prototype.prepareItem = function() {
 	this.item = this.category.selectAll("path")
 		.data(function(d) { return new Array(d); });
 }
 
-D3Donut.prototype.itemEnter = function() {
+D3DonutChart.prototype.itemEnter = function() {
 	var base = this;
 	base.item
 		.enter()
@@ -75,7 +76,7 @@ D3Donut.prototype.itemEnter = function() {
 	    .style("pointer-events", "none");
 }
 
-D3Donut.prototype.itemUpdate = function() {
+D3DonutChart.prototype.itemUpdate = function() {
 	var base = this;
 	base.item
 		.attr("original-value", function(d) { return d.data.value; })	
@@ -101,9 +102,9 @@ D3Donut.prototype.itemUpdate = function() {
 	    .text(function(d) { return base.options.textPercentage(d); });
 }
 
-D3Donut.prototype.itemExit = function() { }
+D3DonutChart.prototype.itemExit = function() { }
 
-D3Donut.prototype.prepare = function() {
+D3DonutChart.prototype.prepare = function() {
 	D3Core.prototype.prepare.apply(this);
 	this.radius = Math.min(this.width, this.height) / 2;
     this.formats = { percent: d3.format('#'), integer: d3.format('f') };
@@ -120,7 +121,7 @@ D3Donut.prototype.prepare = function() {
 	this.svg.attr("transform", "translate(" + this.width/2 + "," + this.height/2 + ")");
 }
 
-D3Donut.prototype.resize = function() {
+D3DonutChart.prototype.resize = function() {
 	var base = this;
 	this.width = $(this.options.container).width() - this.margin.left - this.margin.right;
     this.height = $(this.options.container).height() - this.margin.top - this.margin.bottom;
@@ -136,13 +137,13 @@ D3Donut.prototype.resize = function() {
     });
 }
 
-D3Donut.prototype.prepareScales = function() { 
+D3DonutChart.prototype.prepareScales = function() { 
 	var base = this;
 	this.color = d3.scale.ordinal().range(this.options.colors);
 	this.color.domain(base.dataset.map(function(d) { return d.key; }));	
 }
 
-D3Donut.prototype.tableRender = function() { 
+D3DonutChart.prototype.tableRender = function() { 
 
 }
 
