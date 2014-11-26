@@ -29,7 +29,7 @@ Following is a quick example how to create stacked bar chart.
 
 HTML:
 ```html
-<div id="#stackedbar"></div>
+<div id="stackedbar"></div>
 ```
 Javascript:
 ```js
@@ -133,7 +133,7 @@ D3js stacked bar chart with a support of negative values, responsive design, leg
 #### Usage
 HTML:
 ```html
-<div id="#stackedbar"></div>
+<div id="stackedbar"></div>
 ```
 Javascript:
 ```js
@@ -157,7 +157,7 @@ D3js line chart with a support of negative values, responsive design, legends, t
 #### Usage
 HTML:
 ```html
-<div id="#linechart"></div>
+<div id="linechart"></div>
 ```
 Javascript:
 ```js
