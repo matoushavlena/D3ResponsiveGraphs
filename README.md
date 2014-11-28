@@ -42,6 +42,8 @@ stackedbar.show();
 ### Examples
 * [D3StackedBar example](http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-stackedbar.html)
 * [D3LineChart example](http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-linechart.html)
+* [D3DonutChart example](http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-donutchart.html)
+* [D3PieChart example](http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-piechart.html)
 
 ## Similar Libraries
 I'm currently working on this section. Stay tuned pls.
@@ -152,7 +154,7 @@ stackedbar.show();
 ### D3LineChart
 D3js line chart with a support of negative values, responsive design, legends, tooltips, transitions, and ability to show data in a table view. Example is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-linechart.html
 
-![alt D3StackedBar](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.linechart.png)
+![alt D3LineChart](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.linechart.png)
 
 #### Usage
 HTML:
@@ -174,7 +176,40 @@ linechart.show();
 * `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
 * `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
 
+### D3DonutChart
+D3js donut chart with a support of responsive design, legends, tooltips, transitions, and ability to show data in a table view. Example is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-donutchart.html
+
+#### Usage
+HTML:
+```html
+<div id="donutchart"></div>
+```
+Javascript:
+```js
+var donutchart = new D3DonutChart({ 
+	container: "#donutchart"
+});
+donutchart.show();
+```
+
+#### Specific Options
+* `spacing` (float) - left and right horizontal spacing
+* `data` (Object) - data needs to be in following format: `[ { key: "category 1", value: 55 }, { key: "category 2", value: 25 } ]`
+* `innerRatio` (Float) - ration of the inner circle
+* `outerRatio` (Float) - ration of the outer circle
+* `showInnerCircle` (boolean) - indicates whether inner circle should be rendered as an SVG elemenet (usually set to true if you want to style the center circle your donut)
+* `textCenter` (function(data)) - text to display inside the inner circle
+* `textCenterDY` (String) - can be used to manipulate vertical position of the text inside the inner circle (default value: "0.5rem")
+* `textPercentage` (function(d)) - text to display on each part of the donut (default function display percentage representation of the particular part together with the original value)
+* `tooltipOnMouseEnter` (function) - function called when onmouseover event is triggered for a bar, in default this function displays a tooltip
+* `tooltipOnMouseOut` (function) - function called when onmouseout event is triggered for a bar, in default this function hides a tooltip
+
 ## Changelog
+### Version 0.2
+* Added D3DonutChart
+* Added D3PieChart
+* Fixed bugs, improved performance
+
 ### Version 0.1
 * Added D3LineChart
 * Now modular approach (all the charts inherit default behaviour from D3Core module)
