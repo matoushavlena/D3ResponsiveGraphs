@@ -27,6 +27,9 @@ body { height: 100%; font-size: 0.875rem; font-family: Arial, sans-serif; }
 	-webkit-transition-timing-function: ease-in-out;
 	transition-timing-function: ease-in-out;
 }
+#donutchart g.category text { 
+	fill: #000;
+}
 #donutchart path:hover { 
 	cursor: pointer; 
 	opacity: 1;

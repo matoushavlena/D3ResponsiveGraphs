@@ -36,11 +36,18 @@ D3DonutChart.prototype.prepareCategory = function() {
 	var base = this;
 	this.category = this.svg.selectAll(".category")
 		.data(base.pie(base.dataset));
+
 }
 
 D3DonutChart.prototype.prepareItem = function() {
+	var base = this;
 	this.item = this.category.selectAll("path")
 		.data(function(d) { return new Array(d); });
+	
+	/*this.text = this.textCategory.selectAll("text")
+		.data(function(d) { return new Array(d); });*/
+	
+	this.text = this.svg.append("g").attr("class", "textGroup").selectAll("text").data(base.pie(base.dataset));
 }
 
 D3DonutChart.prototype.itemEnter = function() {
@@ -69,7 +76,7 @@ D3DonutChart.prototype.itemEnter = function() {
 				.attr("r", base.radius * base.options.outerRatio);
 	}
 	
-	base.text = base.category.append("text")
+	base.text.enter().append("text")
 	    .attr("transform", function(d) { return "translate(" + base.arc.centroid(d) + ")"; })
 	    .attr("text-anchor", "middle")
 	    .text(function(d) { return base.options.textPercentage(d); })
@@ -78,6 +85,9 @@ D3DonutChart.prototype.itemEnter = function() {
 
 D3DonutChart.prototype.itemUpdate = function() {
 	var base = this;
+	this.svg.selectAll(".textGroup").remove();
+	this.text = this.svg.append("g").attr("class", "textGroup").selectAll("text").data(base.pie(base.dataset));
+	
 	base.item
 		.attr("original-value", function(d) { return d.data.value; })	
 		.transition().duration(250).ease("cubic-in-out")
@@ -96,13 +106,27 @@ D3DonutChart.prototype.itemUpdate = function() {
 			.attr("r", base.radius * base.options.outerRatio);
 	}
 	
-	base.text
-		.transition().duration(250).ease("cubic-in-out")
+
+	base.text.enter().append("text")
 	    .attr("transform", function(d) { return "translate(" + base.arc.centroid(d) + ")"; })
-	    .text(function(d) { return base.options.textPercentage(d); });
+	    .attr("text-anchor", "middle")
+	    .text(function(d) { return base.options.textPercentage(d); })
+	    .style("pointer-events", "none");
 }
 
-D3DonutChart.prototype.itemExit = function() { }
+D3DonutChart.prototype.itemExit = function() { 
+	var base = this;
+	base.item
+		.exit()
+		.transition().duration(250).ease("cubic-in-out")
+	    .attrTween('d', function(d) {
+		   var i = d3.interpolate(d.startAngle+0.1, d.endAngle);
+		   return function(t) {
+		       d.endAngle = 0;
+		     return base.arc(d);
+		   }
+		});
+}
 
 D3DonutChart.prototype.prepare = function() {
 	D3Core.prototype.prepare.apply(this);
@@ -142,6 +166,11 @@ D3DonutChart.prototype.prepareScales = function() {
 	this.color = d3.scale.ordinal().range(this.options.colors);
 	this.color.domain(base.dataset.map(function(d) { return d.key; }));	
 }
+
+D3DonutChart.prototype.axesUpdate = function() {
+	
+}
+
 
 D3DonutChart.prototype.tableRender = function() { 
 
