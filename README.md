@@ -200,8 +200,8 @@ donutchart.show();
 #### Specific Options
 * `spacing` (float) - left and right horizontal spacing
 * `data` (Object) - data needs to be in following format: `[ { key: "category 1", value: 55 }, { key: "category 2", value: 25 } ]`
-* `innerRatio` (Float) - ration of the inner circle
-* `outerRatio` (Float) - ration of the outer circle
+* `innerRatio` (Float) - ratio of the inner circle
+* `outerRatio` (Float) - ratio of the outer circle
 * `showInnerCircle` (boolean) - indicates whether inner circle should be rendered as an SVG elemenet (usually set to true if you want to style the center circle your donut)
 * `textCenter` (function(data)) - text to display inside the inner circle
 * `textCenterDY` (String) - can be used to manipulate vertical position of the text inside the inner circle (default value: "0.5rem")
