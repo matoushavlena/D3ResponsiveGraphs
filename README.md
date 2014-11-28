@@ -20,6 +20,9 @@ A modular library of responsive, lightweight, and reusable graphs built with D3j
 	- [D3LineChart](#d3linechart)
 	 	- [Usage](#usage-1)
 		- [Specific Options](#specific-options-1)
+	- [D3DonutChart](#d3donutchart)
+	 	- [Usage](#usage-2)
+		- [Specific Options](#specific-options-2)
 - [Changelog](#changelog)
 
 ## Integration Examples
@@ -178,6 +181,8 @@ linechart.show();
 
 ### D3DonutChart
 D3js donut chart with a support of responsive design, legends, tooltips, transitions, and ability to show data in a table view. Example is available here: http://rawgit.com/matoushavlena/D3ResponsiveGraphs/master/demo-donutchart.html
+
+![alt D3DonutChart](https://raw.github.com/matoushavlena/D3ResponsiveGraphs/master/screenshots/d3.donutchart.png)
 
 #### Usage
 HTML:
